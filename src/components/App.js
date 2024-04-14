@@ -8,9 +8,11 @@ import Leaderboard from "./Leaderboard";
 import { receiveUsers } from "../actions/users";
 import { receiveQuestions } from "../actions/questions";
 import { receiveScores } from "../actions/scores";
+import { receiveAnswers } from "../actions/answers";
 import { users } from "../_DATA";
 import { questions } from "../_DATA";
 import { scores } from "../_DATA";
+import { answers } from "../_DATA";
 import { connect } from "react-redux";
 
 
@@ -20,6 +22,7 @@ function App(props) {
     props.dispatch(receiveUsers(users));
     props.dispatch(receiveQuestions(questions));
     props.dispatch(receiveScores(scores));
+    props.dispatch(receiveAnswers(answers));
   }, []);
 
   return (

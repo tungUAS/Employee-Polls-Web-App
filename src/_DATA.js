@@ -66,3 +66,18 @@ export const scores = [
       created: 0,
     },
   ];
+
+export const answers = [
+    {
+      id: 1,
+      user_id: 1,
+      question_id: 3,
+      option: 1,
+    },
+    {
+      id: 2,
+      user_id: 2,
+      question_id: 3,
+      option: 2,
+    },
+]
