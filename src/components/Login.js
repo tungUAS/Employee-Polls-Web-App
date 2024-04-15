@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
 import { useNavigate } from "react-router-dom";
+import loginBackground from "../images/login_background.png"; // Import the image
+import "../styles/Login.css";
 
 const Login = (props) => {
   const [selectedName, setSelectedName] = useState("John");
@@ -19,23 +21,26 @@ const Login = (props) => {
         selectedName
       )
     );
-    navigate("/home");
+    navigate("/questions");
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <label htmlFor="name">Select your name:</label>
-      <select id="name" value={selectedName} onChange={handleChange}>
-        {users && users.map((user) => (
-          <option key={user.id} value={user.name}>
-            {user.name}
-          </option>
-        ))}
-      </select>
+    <div className="login-container">
+      <h1>Log In</h1>
+      <img src={loginBackground}/>
+      <div>
+        <label htmlFor="name">Select your name: </label>
+        <select id="name" value={selectedName} onChange={handleChange}>
+          {users && users.map((user) => (
+            <option key={user.id} value={user.name}>
+              {user.name}
+            </option>
+          ))}
+        </select>
+      </div>
       <br />
       <br />
-      <button onClick={() => handleLogin()}>Login</button>
+      <button onClick={() => handleLogin()} className="login-button">Let's Go</button>
     </div>
   );
 };

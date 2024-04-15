@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import "../styles/Question.css";
 
 const Question = (props) => {
   const { id, name, timestamp } = props;
+  console.log("props in question",props);
   const navigate = useNavigate();
 
   const goToQuestion = (id) => {
@@ -9,9 +11,9 @@ const Question = (props) => {
   };
 
   return (
-    <div>
-      <p>author: {name}</p>
-      <p>created_at: {timestamp}</p>
+    <div className="question-container">
+      <p className="author-text">{name}</p>
+      <p className="timestamp-text">{timestamp}</p>
       <button onClick={()=> goToQuestion(id)}>SHOW</button>
     </div>
   );

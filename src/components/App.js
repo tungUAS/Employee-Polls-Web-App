@@ -1,4 +1,4 @@
-import { useEffect,Fragment } from "react";
+import { useEffect, Fragment } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login";
@@ -14,7 +14,7 @@ import { questions } from "../_DATA";
 import { scores } from "../_DATA";
 import { answers } from "../_DATA";
 import { connect } from "react-redux";
-
+import ProtectedRoute from "./ProtectedRoute";
 
 function App(props) {
   useEffect(() => {
@@ -27,15 +27,15 @@ function App(props) {
 
   return (
     <Fragment>
-    <div className="container">
-      <Routes>
+      <div className="container">
+        <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/questions/:id" element={<QuestionPage/>} />
-          <Route path="/questions/add" element={<NewQuestion />} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-      </Routes>
-    </div>
+          <Route path="/questions" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route path="/questions/:id" element={<ProtectedRoute><QuestionPage /></ProtectedRoute>} />
+          <Route path="/questions/add" element={<ProtectedRoute><NewQuestion /></ProtectedRoute>} />
+          <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
+        </Routes>
+      </div>
     </Fragment>
   );
 }

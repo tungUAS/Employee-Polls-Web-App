@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { addNewQuestion } from "../actions/questions";
 import { updateCreatedScores } from "../actions/scores";
 import Nav from "./Nav";
+import "../styles/NewQuestion.css";
 
 const NewQuestion = (props) => {
   const [optionOne, setOptionOne] = useState("");
@@ -30,26 +31,32 @@ const NewQuestion = (props) => {
   return (
     <div>
       <Nav />
+      <div className="new-question-container">
       <h1>Would you rather</h1>
-      <input
-        type="text"
-        placeholder="Option One"
-        value={optionOne}
-        onChange={(e) => setOptionOne(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Option Two"
-        value={optionTwo}
-        onChange={(e) => setOptionTwo(e.target.value)}
-      />
-      <button
-        disabled={optionOne === "" || optionTwo === "" || optionOne === optionTwo}
-        onClick={() => handleAddNewQuestion()}
-      >
-        Submit
-      </button>
-      {submitted && <p>You just submitted a new question</p>}
+      <div className="input-container">
+        <input
+          type="text"
+          placeholder="Option One"
+          value={optionOne}
+          onChange={(e) => setOptionOne(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Option Two"
+          value={optionTwo}
+          onChange={(e) => setOptionTwo(e.target.value)}
+        />
+        <button
+          disabled={
+            optionOne === "" || optionTwo === "" || optionOne === optionTwo
+          }
+          onClick={() => handleAddNewQuestion()}
+        >
+          Submit
+        </button>
+        {submitted && <p>You just submitted a new question</p>}
+      </div>
+      </div>
     </div>
   );
 };

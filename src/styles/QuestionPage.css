@@ -1,0 +1,25 @@
+.questions-page-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.questions-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow containers to wrap to the next row */
+  justify-content: space-around; /* Distribute containers evenly */
+}
+
+.questions-asked-container {
+  flex: 1; /* Flex-grow to occupy available space */
+  border: 2px solid #dbbcbc;
+  margin: 10px;
+}
+
+.questions-asked-container button {
+  color: white;
+  margin-bottom: 5px;
+}
+
+.questions-page-container h1:nth-child(2) {
+  color: #c94343;
+}

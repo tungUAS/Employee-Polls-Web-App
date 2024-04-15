@@ -1,0 +1,43 @@
+.new-question-container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.input-container input {
+    margin-bottom: 10px; 
+    border: #dbbcbc 1px solid;
+    border-radius: 10px;
+}
+
+.input-container input,
+input::placeholder {
+    font: 1rem sans-serif;
+}
+
+.input-container button {
+    background-color: #dbbcbc;
+    border: none;
+    border-radius: 10px;
+    color: rgb(58, 52, 52);
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 40%;
+    margin: 0 auto;
+  }
+  
+  .input-container button[disabled] {
+    background-color: #ccc; 
+    color: #666; 
+    cursor: not-allowed;
+  }

@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import Nav from "./Nav";
+import "../styles/Leaderboard.css";
 
 const Leaderboard = (props) => {
   const { scores, users } = props;
@@ -17,7 +18,7 @@ const Leaderboard = (props) => {
     <div>
       <Nav />
       <h1>Leaderboard</h1>
-      <table>
+      <table className="leaderboard-table">
         <thead>
           <tr>
             <th>User</th>
@@ -29,8 +30,8 @@ const Leaderboard = (props) => {
           {sortedScores.map((score) => (
             <tr key={score.user_id}>
               <td>{users.find((user) => user.id === score.user_id).name}</td>
-              <td>{score.created}</td>
               <td>{score.answered}</td>
+              <td>{score.created}</td>
             </tr>
           ))}
         </tbody>
