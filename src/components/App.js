@@ -5,24 +5,13 @@ import Login from "./Login";
 import QuestionPage from "./QuestionPage";
 import NewQuestion from "./NewQuestion";
 import Leaderboard from "./Leaderboard";
-import { receiveUsers } from "../actions/users";
-import { receiveQuestions } from "../actions/questions";
-import { receiveScores } from "../actions/scores";
-import { receiveAnswers } from "../actions/answers";
-import { users } from "../_DATA";
-import { questions } from "../_DATA";
-import { scores } from "../_DATA";
-import { answers } from "../_DATA";
 import { connect } from "react-redux";
 import ProtectedRoute from "./ProtectedRoute";
+import { handleInitialData } from "../actions/shared";
 
 function App(props) {
   useEffect(() => {
-    // combine dispatches
-    props.dispatch(receiveUsers(users));
-    props.dispatch(receiveQuestions(questions));
-    props.dispatch(receiveScores(scores));
-    props.dispatch(receiveAnswers(answers));
+    props.dispatch(handleInitialData());
   }, []);
 
   return (

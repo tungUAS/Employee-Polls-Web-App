@@ -6,6 +6,7 @@ export default function answers(state = [], action) {
     case RECEIVE_ANSWERS:
       return action.answers;
     case ADD_ANSWER:
+      console.log("ADD_ANSWER", state, action);
         return [
             ...state,
             {

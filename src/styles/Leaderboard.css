@@ -8,6 +8,7 @@
 .leaderboard-table td {
   padding: 12px;
   border: 1px solid #ddd;
+  text-align: center;
 }
 
 .leaderboard-table th {
@@ -20,4 +21,17 @@
 
 .leaderboard-table tbody tr:hover {
   background-color: #ddd;
+}
+
+.user-info {
+  display: flex;
+  align-items: center; /* Align items vertically */
+}
+
+.user-info img {
+  margin: auto 0;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 10px; /* Add some space between the avatar and the name */
 }

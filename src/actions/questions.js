@@ -1,3 +1,5 @@
+import { saveNewQuestion, saveAnsweredByQuestion } from "../api";
+
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
 export const ADD_ANSWERED_BY_QUESTION = "ADD_ANSWERED_BY_QUESTION";
 export const ADD_NEW_QUESTION = "ADD_NEW_QUESTION";
@@ -23,5 +25,19 @@ export const addNewQuestion = (authedUserId, optionOne, optionTwo) => {
     authedUserId,
     optionOne,
     optionTwo,
+  };
+}
+
+export const handleAddAnsweredByQuestion = (authedUserId, questionId) => {
+  return async (dispatch) => {
+    await saveAnsweredByQuestion(authedUserId, questionId);
+    dispatch(addAnsweredByQuestion(authedUserId, questionId));
+  };
+}
+
+export const handleAddNewQuestion = (authedUserId, optionOne, optionTwo) => {
+  return async (dispatch) => {
+    await saveNewQuestion(authedUserId, optionOne, optionTwo);
+    dispatch(addNewQuestion(authedUserId, optionOne, optionTwo));
   };
 }

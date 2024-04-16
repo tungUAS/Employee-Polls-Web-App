@@ -23,3 +23,12 @@
 .questions-page-container h1:nth-child(2) {
   color: #c94343;
 }
+
+
+img {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: #dbbcbc 2px solid;
+}

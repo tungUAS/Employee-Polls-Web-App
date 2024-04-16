@@ -3,7 +3,6 @@ import "../styles/Question.css";
 
 const Question = (props) => {
   const { id, name, timestamp } = props;
-  console.log("props in question",props);
   const navigate = useNavigate();
 
   const goToQuestion = (id) => {

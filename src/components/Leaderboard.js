@@ -1,18 +1,17 @@
+import React from "react";
 import { connect } from "react-redux";
 import Nav from "./Nav";
 import "../styles/Leaderboard.css";
 
-const Leaderboard = (props) => {
-  const { scores, users } = props;
+const Leaderboard = ({ scores, users } ) => {
 
   const sortedScores = scores.sort((a, b) => {
     if (a.answered !== b.answered) {
-        return b.answered - a.answered;
+      return b.answered - a.answered;
     } else {
-        return b.created - a.created;
+      return b.created - a.created;
     }
-});
-
+  });
 
   return (
     <div>
@@ -29,9 +28,22 @@ const Leaderboard = (props) => {
         <tbody>
           {sortedScores.map((score) => (
             <tr key={score.user_id}>
-              <td>{users.find((user) => user.id === score.user_id).name}</td>
-              <td>{score.answered}</td>
+              <td>
+                <div className="user-info">
+                  <img
+                    src={
+                      users.find((user) => user.id === score.user_id).avatar_url
+                    }
+                    alt="User Avatar"
+                    className="avatar"
+                  />
+                  <span>
+                    {users.find((user) => user.id === score.user_id).name}
+                  </span>
+                </div>
+              </td>
               <td>{score.created}</td>
+              <td>{score.answered}</td>
             </tr>
           ))}
         </tbody>
@@ -40,11 +52,9 @@ const Leaderboard = (props) => {
   );
 };
 
-const mapStateToProps = ({ scores, users }) => {
-  return {
-    scores: scores,
-    users: users,
-  };
-};
+const mapStateToProps = ({ scores, users }) => ({
+  scores,
+  users,
+});
 
 export default connect(mapStateToProps)(Leaderboard);

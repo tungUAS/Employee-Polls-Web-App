@@ -5,9 +5,8 @@ import { useNavigate } from "react-router-dom";
 import loginBackground from "../images/login_background.png"; // Import the image
 import "../styles/Login.css";
 
-const Login = (props) => {
-  const [selectedName, setSelectedName] = useState("John");
-  const { users } = props;
+const Login = ({ users, dispatch }) => {
+  const [selectedName, setSelectedName] = useState("Sarah");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -15,7 +14,7 @@ const Login = (props) => {
   };
 
   const handleLogin = () => {
-    props.dispatch(
+    dispatch(
       setAuthedUser(
         users.find((user) => user.name === selectedName).id,
         selectedName

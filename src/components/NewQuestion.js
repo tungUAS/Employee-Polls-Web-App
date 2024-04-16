@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { addNewQuestion } from "../actions/questions";
-import { updateCreatedScores } from "../actions/scores";
+import { handleAddNewQuestion } from "../actions/questions";
+import { handleUpdateCreatedScores } from "../actions/scores";
 import Nav from "./Nav";
 import "../styles/NewQuestion.css";
 
-const NewQuestion = (props) => {
+const NewQuestion = ({dispatch, authedUser}) => {
   const [optionOne, setOptionOne] = useState("");
   const [optionTwo, setOptionTwo] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleAddNewQuestion = () => {
-    props.dispatch(addNewQuestion(props.authedUser.id, optionOne, optionTwo));
-    props.dispatch(updateCreatedScores(props.authedUser.id));
+  const addNewQuestion = () => {
+    dispatch(handleAddNewQuestion(authedUser.id, optionOne, optionTwo));
+    dispatch(handleUpdateCreatedScores(authedUser.id));
     setOptionOne("");
     setOptionTwo("");
     setSubmitted(true);
@@ -50,7 +50,7 @@ const NewQuestion = (props) => {
           disabled={
             optionOne === "" || optionTwo === "" || optionOne === optionTwo
           }
-          onClick={() => handleAddNewQuestion()}
+          onClick={() => addNewQuestion()}
         >
           Submit
         </button>
