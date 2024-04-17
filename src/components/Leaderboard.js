@@ -4,6 +4,7 @@ import Nav from "./Nav";
 import "../styles/Leaderboard.css";
 
 const Leaderboard = ({ scores, users } ) => {
+  console.log(scores);
 
   const sortedScores = scores.sort((a, b) => {
     if (a.answered !== b.answered) {

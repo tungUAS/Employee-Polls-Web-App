@@ -30,14 +30,14 @@ export const addNewQuestion = (authedUserId, optionOne, optionTwo) => {
 
 export const handleAddAnsweredByQuestion = (authedUserId, questionId) => {
   return async (dispatch) => {
-    await saveAnsweredByQuestion(authedUserId, questionId);
     dispatch(addAnsweredByQuestion(authedUserId, questionId));
+    await saveAnsweredByQuestion(authedUserId, questionId);
   };
 }
 
 export const handleAddNewQuestion = (authedUserId, optionOne, optionTwo) => {
   return async (dispatch) => {
-    await saveNewQuestion(authedUserId, optionOne, optionTwo);
     dispatch(addNewQuestion(authedUserId, optionOne, optionTwo));
+    await saveNewQuestion(authedUserId, optionOne, optionTwo);
   };
 }

@@ -27,14 +27,14 @@ export const updateCreatedScores = (authedUserId) => {
 
 export const handleUpdateAnsweredScores = (authedUserId) => {
     return async (dispatch) => {
-        await saveUpdateAnsweredScores(authedUserId);
         dispatch(updateAnsweredScores(authedUserId));
+        await saveUpdateAnsweredScores(authedUserId);
     };
 }
 
 export const handleUpdateCreatedScores = (authedUserId) => {
     return async (dispatch) => {
-        await saveUpdateCreatedScores(authedUserId);
         dispatch(updateCreatedScores(authedUserId));
+        await saveUpdateCreatedScores(authedUserId);
     };
 }

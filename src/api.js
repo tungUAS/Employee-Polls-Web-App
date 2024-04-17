@@ -25,19 +25,19 @@ export async function getInitialData() {
     });
 };
 
-export function saveNewAnswer(option, authedUser, questionId) {
+export async function saveNewAnswer(option, authedUser, questionId) {
     return _addNewAnswer(option, authedUser, questionId);
 }
 
-export function saveAnsweredByQuestion(authedUser, questionId) {
+export async function saveAnsweredByQuestion(authedUser, questionId) {
     return _addAnsweredByQuestion(authedUser, questionId);
 }
 
-export function saveNewQuestion(authedUser, optionOne, optionTwo) {
+export async function saveNewQuestion(authedUser, optionOne, optionTwo) {
     return _addNewQuestion(authedUser, optionOne, optionTwo);
 }
 
-export function saveUpdateAnsweredScores(authedUser) {
+export async function saveUpdateAnsweredScores(authedUser) {
     return _updateAnsweredScores(authedUser);
 }
 

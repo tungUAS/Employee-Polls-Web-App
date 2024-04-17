@@ -11,6 +11,7 @@ const scores = (state = [], action) => {
           : score
       );
     case UPDATE_CREATED_SCORES:
+      console.log("action in reducer", action);
       return state.map(score =>
         score.user_id === action.authedUserId
           ? { ...score, created: score.created + 1 }

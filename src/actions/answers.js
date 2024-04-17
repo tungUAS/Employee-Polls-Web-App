@@ -21,7 +21,7 @@ export function addNewAnswer(option, authedUser, questionId) {
 
 export const handleAddNewAnswer = (option, authedUser, questionId) => {
     return async (dispatch) => {
-        await saveNewAnswer(option, authedUser, questionId);
         dispatch(addNewAnswer(option, authedUser, questionId));
+        await saveNewAnswer(option, authedUser, questionId);
     };
 };
