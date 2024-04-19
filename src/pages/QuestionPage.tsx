@@ -9,6 +9,8 @@ import { AuthedUserType, UsersType } from "../models/user.type";
 import { AnswersType } from "../models/answer.type";
 import React from "react";
 import { NotFound } from "../components/NotFound";
+import { useNavigate } from "react-router-dom";
+import ButtonGoBackTo from "../components/Button";
 
 const QuestionPage = ({
   questions,
@@ -23,6 +25,8 @@ const QuestionPage = ({
   answers: AnswersType;
   dispatch: any;
 }) => {
+  const navigate = useNavigate();
+
   const params = useParams();
   const idFromParams = parseInt(params.id as string, 10);
   const question = questions.find((question) => question.id === idFromParams);
@@ -30,7 +34,6 @@ const QuestionPage = ({
   if (!question || !authedUser) return <NotFound/>;
 
   const author = users.find((user) => user.id === question.created_by);
-  if (!author) return null;
   let isThisAuthorAlreadyAnswered = question.answered_by.includes(
     authedUser.id
   );
@@ -64,10 +67,15 @@ const QuestionPage = ({
     isThisAuthorAlreadyAnswered = true;
   };
 
+  const goToHomePage = () => {
+    navigate("/questions");
+  };
+
+
   return (
     <div className="questions-page-container">
-      <h1>Question By: {author.name}</h1>
-      <img src={author.avatar_url} alt="avatar" />
+      <h1>Question By: {author?.name}</h1>
+      <img src={author?.avatar_url} alt="avatar" />
       <h1>Would you rather </h1>
       <div className="questions-container">
         {[question.option_one, question.option_two].map((option, index) => (
@@ -105,6 +113,7 @@ const QuestionPage = ({
       ) : (
         <p>Be the first to answer this question</p>
       )}
+      <ButtonGoBackTo text="BACK" handleClick={goToHomePage} dataTestId={null}/>
     </div>
   );
 };

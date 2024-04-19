@@ -6,8 +6,13 @@ import { UsersType } from "../models/user.type";
 import { Dispatch } from "redux";
 import "../styles/Login.css";
 
-
-const LoginPage = ({ users, dispatch }:{users: UsersType, dispatch: Dispatch}) => {
+const LoginPage = ({
+  users,
+  dispatch,
+}: {
+  users: UsersType;
+  dispatch: Dispatch;
+}) => {
   const [selectedName, setSelectedName] = useState("Sarah");
   const navigate = useNavigate();
 
@@ -30,7 +35,10 @@ const LoginPage = ({ users, dispatch }:{users: UsersType, dispatch: Dispatch}) =
   return (
     <div className="login-container">
       <h1>Log In</h1>
-      <img src="../images/login_background.png" alt="Login Background" />
+      <img
+        src="https://gravatar.com/avatar/17461862a35eb112646cd5f27097ca85?s=400&d=robohash&r=x"
+        alt="Login Background"
+      />
       <div>
         <label htmlFor="name">Select your name: </label>
         <select id="name" value={selectedName} onChange={handleChange}>

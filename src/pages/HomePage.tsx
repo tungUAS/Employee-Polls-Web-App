@@ -7,15 +7,18 @@ import { QuestionsType } from "../models/question.type";
 import { AuthedUserType, UsersType } from "../models/user.type";
 import { formatDate } from "../helpers";
 import { NotFound } from "../components/NotFound";
+import { Dispatch } from "redux";
 
 const HomePage = ({
   authedUser,
   questions,
   users,
+  dispatch
 }: {
   authedUser: AuthedUserType;
   questions: QuestionsType;
   users: UsersType;
+  dispatch:Dispatch
 }) => {
   if(!authedUser) return <NotFound/>;
   
@@ -28,7 +31,7 @@ const HomePage = ({
 
   return (
     <div>
-      <Nav />
+      <Nav dispatch={dispatch}/>
       <h1>Hello {authedUser?.name}</h1>
       <div className="home-container">
         {[false, true].map((answered) => (
@@ -66,14 +69,17 @@ const mapStateToProps = ({
   authedUser,
   questions,
   users,
+  dispatch
 }: {
   authedUser: AuthedUserType;
   questions: QuestionsType;
   users: UsersType;
+  dispatch:Dispatch
 }) => ({
   authedUser,
   questions,
   users,
+  dispatch
 });
 
 export default connect(mapStateToProps)(HomePage);

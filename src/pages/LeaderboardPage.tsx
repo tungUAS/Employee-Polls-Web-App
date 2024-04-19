@@ -3,15 +3,35 @@ import { connect } from "react-redux";
 import Nav from "../components/Nav";
 import "../styles/Leaderboard.css";
 import { ScoresType } from "../models/score.type";
-import { UsersType } from "../models/user.type";
+import { AuthedUserType, UsersType } from "../models/user.type";
 import { sortScores } from "../helpers";
+import { NotFound } from "../components/NotFound";
+import { useNavigate } from "react-router-dom";
+import ButtonGoBackTo from "../components/Button";
 
-const LeaderboardPage = ({ scores, users }: {scores: ScoresType, users: UsersType} ) => {
+const LeaderboardPage = ({
+  scores,
+  users,
+  authedUser,
+  dispatch,
+}: {
+  scores: ScoresType;
+  users: UsersType;
+  authedUser: AuthedUserType;
+  dispatch: any;
+}) => {
+
+  const navigate = useNavigate();
+  if (!authedUser) return <NotFound />;
   const sortedScores = sortScores(scores);
+
+  const goToHomePage = () => {
+    navigate("/questions");
+  };
 
   return (
     <div>
-      <Nav />
+      <Nav dispatch={dispatch}/>
       <h1>Leaderboard</h1>
       <table className="leaderboard-table">
         <thead>
@@ -28,7 +48,8 @@ const LeaderboardPage = ({ scores, users }: {scores: ScoresType, users: UsersTyp
                 <div className="user-info">
                   <img
                     src={
-                      users.find((user) => user.id === score.user_id)?.avatar_url
+                      users.find((user) => user.id === score.user_id)
+                        ?.avatar_url
                     }
                     alt="User Avatar"
                     className="avatar"
@@ -44,13 +65,26 @@ const LeaderboardPage = ({ scores, users }: {scores: ScoresType, users: UsersTyp
           ))}
         </tbody>
       </table>
+      <ButtonGoBackTo text="BACK" handleClick={goToHomePage} dataTestId={null}/>
     </div>
   );
 };
 
-const mapStateToProps = ({ scores, users }: {scores: ScoresType, users: UsersType}) => ({
+const mapStateToProps = ({
   scores,
   users,
+  authedUser,
+  dispatch,
+}: {
+  scores: ScoresType;
+  users: UsersType;
+  authedUser: AuthedUserType;
+  dispatch: any;
+}) => ({
+  scores,
+  users,
+  authedUser,
+  dispatch,
 });
 
 export default connect(mapStateToProps)(LeaderboardPage);

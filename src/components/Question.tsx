@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/Question.css";
 import React from "react";
+import ButtonGoBackTo from "./Button";
 
 const Question = ({ id, name, timestamp }: {id:number, name: string, timestamp: string}) => {
   const navigate = useNavigate();
 
-  const goToQuestion = (id:number) => {
+  const goToHomePage = (id:number) => {
     navigate(`/questions/${id}`);
   };
 
@@ -13,7 +14,7 @@ const Question = ({ id, name, timestamp }: {id:number, name: string, timestamp: 
     <div className="question-container">
       <p className="author-text">{name}</p>
       <p className="timestamp-text">{timestamp}</p>
-      <button onClick={()=> goToQuestion(id)} data-testid={`show-button-${id}`}>SHOW</button>
+      <ButtonGoBackTo text="SHOW" handleClick={() => goToHomePage(id)} dataTestId={`show-button-${id}`}/>
     </div>
   );
 };

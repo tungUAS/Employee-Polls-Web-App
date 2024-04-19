@@ -7,8 +7,12 @@ import "../styles/NewQuestion.css";
 import React from "react";
 import { AuthedUserType } from "../models/user.type";
 import { NotFound } from "../components/NotFound";
+import { useNavigate } from "react-router-dom";
+
 
 const NewQuestionPage = ({dispatch, authedUser}:{dispatch: any, authedUser: AuthedUserType}) => {
+  const navigate = useNavigate();
+
   const [optionOne, setOptionOne] = useState("");
   const [optionTwo, setOptionTwo] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -39,9 +43,13 @@ const NewQuestionPage = ({dispatch, authedUser}:{dispatch: any, authedUser: Auth
 
   if(!authedUser) return <NotFound/>
 
+  const goToHomePage = () => {
+    navigate("/questions");
+  };
+
   return (
     <div>
-      <Nav />
+      <Nav dispatch={dispatch}/>
       <div className="new-question-container">
       <h1>Would you rather</h1>
       <div className="input-container">
@@ -68,6 +76,7 @@ const NewQuestionPage = ({dispatch, authedUser}:{dispatch: any, authedUser: Auth
         {submitted && <p>You just submitted a new question</p>}
       </div>
       </div>
+      <button onClick={goToHomePage}>Back</button>
     </div>
   );
 };

@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import "../styles/Nav.css";
 import React from "react";
+import { setAuthedUser } from "../redux/actions/authedUser";
 
-const Nav = () => {
+const Nav = ({dispatch}:{dispatch:any}) => {
+  const removeAuthedUser = () => {
+    dispatch(setAuthedUser({id:null,name:null}));
+  };
+
   return (
     <nav className="nav">
       <ul>
@@ -15,8 +20,8 @@ const Nav = () => {
         <li>
           <Link to="/questions/add">New</Link>
         </li>
-        <li className="active">
-          <Link to="/logout">Logout</Link>
+        <li className="active" onClick={removeAuthedUser}>
+          <Link to="/">Logout</Link>
         </li>
       </ul>
     </nav>
