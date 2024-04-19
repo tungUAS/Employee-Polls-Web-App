@@ -31,7 +31,7 @@ const QuestionPage = ({
   const idFromParams = parseInt(params.id as string, 10);
   const question = questions.find((question) => question.id === idFromParams);
 
-  if (!question || !authedUser) return <NotFound/>;
+  if (!question || !authedUser) return <NotFound />;
 
   const author = users.find((user) => user.id === question.created_by);
   let isThisAuthorAlreadyAnswered = question.answered_by.includes(
@@ -71,7 +71,6 @@ const QuestionPage = ({
     navigate("/questions");
   };
 
-
   return (
     <div className="questions-page-container">
       <h1>Question By: {author?.name}</h1>
@@ -97,23 +96,43 @@ const QuestionPage = ({
         ))}
       </div>
       {isThisAuthorAlreadyAnswered && (
-        <p>
+        <b>
           You Already Answered with{" "}
           {answered ? options[answered.option - 1] : null}
-        </p>
+        </b>
       )}
       {numberOfPeopleAnsweredThisQuestion > 0 ? (
         <>
           <p>
             {numberOfPeopleAnsweredThisQuestion} people answered this question
           </p>
-          <p>{numberOfPeopleVotedForOptionOne} people voted for option one</p>
-          <p>{numberOfPeopleVotedForOptionTwo} people voted for option two</p>
+          <p>
+            {numberOfPeopleVotedForOptionOne} people (
+            {(
+              (numberOfPeopleVotedForOptionOne /
+                numberOfPeopleAnsweredThisQuestion) *
+              100
+            ).toFixed(2)}
+            %) voted for option one
+          </p>
+          <p>
+            {numberOfPeopleVotedForOptionTwo} people (
+            {(
+              (numberOfPeopleVotedForOptionTwo /
+                numberOfPeopleAnsweredThisQuestion) *
+              100
+            ).toFixed(2)}
+            %) voted for option two
+          </p>
         </>
       ) : (
         <p>Be the first to answer this question</p>
       )}
-      <ButtonGoBackTo text="BACK" handleClick={goToHomePage} dataTestId={null}/>
+      <ButtonGoBackTo
+        text="BACK"
+        handleClick={goToHomePage}
+        dataTestId={null}
+      />
     </div>
   );
 };

@@ -25,7 +25,7 @@ describe("Login Page Test", () => {
     const store = createStore(reducer);
     store.dispatch(receiveUsers({users: mockUsers}));
 
-    const { getByText, getByLabelText, getByRole } = render(
+    const { getByText, getByLabelText, getByRole, asFragment } = render(
       <MemoryRouter>
         <Provider store={store}>
           <LoginPage users={mockUsers} />
@@ -41,6 +41,8 @@ describe("Login Page Test", () => {
 
     const loginButton = getByRole("button", { name: "Let's Go" });
     expect(loginButton).toBeInTheDocument();
+
+    expect(asFragment()).toMatchSnapshot();
   });
 
   it("dispatches setAuthedUser action and navigates to questions page on login", () => {

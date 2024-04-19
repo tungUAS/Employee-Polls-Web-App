@@ -8,6 +8,7 @@ import { sortScores } from "../helpers";
 import { NotFound } from "../components/NotFound";
 import { useNavigate } from "react-router-dom";
 import ButtonGoBackTo from "../components/Button";
+import { Dispatch } from "redux";
 
 const LeaderboardPage = ({
   scores,
@@ -18,9 +19,8 @@ const LeaderboardPage = ({
   scores: ScoresType;
   users: UsersType;
   authedUser: AuthedUserType;
-  dispatch: any;
+  dispatch: Dispatch;
 }) => {
-
   const navigate = useNavigate();
   if (!authedUser) return <NotFound />;
   const sortedScores = sortScores(scores);
@@ -79,7 +79,7 @@ const mapStateToProps = ({
   scores: ScoresType;
   users: UsersType;
   authedUser: AuthedUserType;
-  dispatch: any;
+  dispatch: Dispatch;
 }) => ({
   scores,
   users,

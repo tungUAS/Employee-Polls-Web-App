@@ -7,6 +7,7 @@ import { MemoryRouter } from "react-router-dom";
 import { receiveUsers } from "../redux/actions/users";
 import { receiveScores } from "../redux/actions/scores";
 import Leaderboard from "../pages/LeaderboardPage";
+import { setAuthedUser } from "../redux/actions/authedUser";
 
 const mockNavigate = jest.fn();
 
@@ -36,13 +37,18 @@ describe("Leader Board Page Test", () => {
 
   it("renders leaderboard table with all components", () => {
     const store = createStore(reducer);
-    store.dispatch(receiveUsers({users:mockUsers}));
-    store.dispatch(receiveScores({scores:mockScores}));
+    store.dispatch(receiveUsers({ users: mockUsers }));
+    store.dispatch(receiveScores({ scores: mockScores }));
+    store.dispatch(setAuthedUser({ id: mockUsers.id, name: mockUsers.name }));
 
     const { getByRole, getByText, getAllByAltText, getAllByRole } = render(
       <MemoryRouter>
         <Provider store={store}>
-          <Leaderboard scores={mockScores} users={mockUsers} />
+          <Leaderboard
+            scores={mockScores}
+            users={mockUsers}
+            authedUser={{ id: mockUsers.id, name: mockUsers.name }}
+          />
         </Provider>
       </MemoryRouter>
     );
@@ -94,5 +100,25 @@ describe("Leader Board Page Test", () => {
 
     const user2Answered = getByText("3");
     expect(user2Answered).toBeInTheDocument();
+  });
+
+  it("should appear 404 page when user is not authenticated", () => {
+    const store = createStore(reducer);
+    store.dispatch(receiveUsers({ users: mockUsers }));
+    store.dispatch(receiveScores({ scores: mockScores }));
+
+    const { getByRole } = render(
+      <MemoryRouter>
+        <Provider store={store}>
+          <Leaderboard
+            scores={mockScores}
+            users={mockUsers}
+          />
+        </Provider>
+      </MemoryRouter>
+    );
+
+    const notFoundHeading = getByRole("heading", { name: "404 Not Found" });
+    expect(notFoundHeading).toBeInTheDocument();
   });
 });
