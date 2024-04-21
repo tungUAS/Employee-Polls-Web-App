@@ -1,0 +1,30 @@
+.tab-list {
+    list-style-type: none; 
+    padding: 0; 
+    margin: 0;
+    display: flex; 
+    justify-content: space-around; 
+    border-bottom: 2px solid #ccc; 
+  }
+  
+  .tab-item {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .tab-item.react-tabs__tab--selected {
+    background-color: #ba8181;
+    font-weight: bold;
+  }
+  
+  .tab-item:hover {
+    background-color: #bc8f8f;
+  }
+  
+  .tab-panel {
+    padding: 20px;
+  }
+  

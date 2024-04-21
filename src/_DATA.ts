@@ -132,7 +132,7 @@ export const _getAnswers = (): Promise<AnswersType> => {
   });
 };
 
-export const _addNewAnswer = ({option, authedUserId, questionId}:{
+export const _saveAnswer = ({option, authedUserId, questionId}:{
   option: number;
   authedUserId: number;
   questionId: number;
@@ -150,23 +150,28 @@ export const _addNewAnswer = ({option, authedUserId, questionId}:{
   });
 };
 
-export const _addAnsweredByQuestion = ({authedUserId, questionId}:{
+export const _saveQuestionAnswer = ({authedUserId, questionId}:{
   authedUserId: number;
   questionId: number;
 }): Promise<void> => {
   return new Promise((res, rej) => {
+    if (!authedUserId) {
+      rej(new Error("User ID is required."));
+    };
+    if(!questionId) {
+      rej(new Error("Question ID is required."));
+    };
     setTimeout(() => {
       const questionToUpdate = questions.find((question) => question.id === questionId);
       if (questionToUpdate) {
         questionToUpdate.answered_by.push(authedUserId);
         res();
       };
-      rej(new Error("Question not found for the provided question ID."));
     }, 500);
   });
 };
 
-export const _addNewQuestion = ({
+export const _saveQuestion = ({
   authedUserId,
   optionOne,
   optionTwo,

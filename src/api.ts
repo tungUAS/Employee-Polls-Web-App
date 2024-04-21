@@ -3,9 +3,9 @@ import {
   _getUsers,
   _getScores,
   _getAnswers,
-  _addNewAnswer,
-  _addAnsweredByQuestion,
-  _addNewQuestion,
+  _saveAnswer,
+  _saveQuestionAnswer,
+  _saveQuestion,
   _updateAnsweredScores,
   _updateCreatedScores,
 } from "./_DATA";
@@ -34,20 +34,20 @@ export async function saveNewAnswer({
   authedUserId: number;
   questionId: number;
 }) {
-  return _addNewAnswer({ option, authedUserId, questionId });
+  return _saveAnswer({ option, authedUserId, questionId });
 }
 
-export async function saveAnsweredByQuestion({
+export async function saveQuestionAnswer({
   authedUserId,
   questionId,
 }: {
   authedUserId: number;
   questionId: number;
 }) {
-  return _addAnsweredByQuestion({ authedUserId, questionId });
+  return _saveQuestionAnswer({ authedUserId, questionId });
 }
 
-export async function saveNewQuestion({
+export async function saveQuestion({
   authedUserId,
   optionOne,
   optionTwo,
@@ -56,7 +56,7 @@ export async function saveNewQuestion({
   optionOne: string;
   optionTwo: string;
 }) {
-  return _addNewQuestion({ authedUserId, optionOne, optionTwo });
+  return _saveQuestion({ authedUserId, optionOne, optionTwo });
 }
 
 export async function saveUpdateAnsweredScores({

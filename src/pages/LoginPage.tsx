@@ -16,11 +16,17 @@ const LoginPage = ({
   const [selectedName, setSelectedName] = useState("Sarah");
   const navigate = useNavigate();
 
+  const pathToBeRedirected = localStorage.getItem("redirect");
+
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedName(e.target.value);
   };
 
   const handleLogin = () => {
+    if(pathToBeRedirected){
+      navigate(pathToBeRedirected);
+    };
+
     const user = users.find((user) => user.name === selectedName);
     if (!user) return;
     dispatch(
@@ -29,7 +35,7 @@ const LoginPage = ({
         name: user.name,
       })
     );
-    navigate("/questions");
+    navigate(pathToBeRedirected ? pathToBeRedirected : "/questions");
   };
 
   return (

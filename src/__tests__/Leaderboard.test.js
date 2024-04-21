@@ -102,7 +102,7 @@ describe("Leader Board Page Test", () => {
     expect(user2Answered).toBeInTheDocument();
   });
 
-  it("should appear 404 page when user is not authenticated", () => {
+  it("should appear protected page when user is not authenticated", () => {
     const store = createStore(reducer);
     store.dispatch(receiveUsers({ users: mockUsers }));
     store.dispatch(receiveScores({ scores: mockScores }));
@@ -118,7 +118,7 @@ describe("Leader Board Page Test", () => {
       </MemoryRouter>
     );
 
-    const notFoundHeading = getByRole("heading", { name: "404 Not Found" });
+    const notFoundHeading = getByRole("button", { name: "Login Page" });
     expect(notFoundHeading).toBeInTheDocument();
   });
 });

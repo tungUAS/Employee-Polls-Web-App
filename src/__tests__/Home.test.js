@@ -72,7 +72,7 @@ describe("Home Component", () => {
         </Provider>
       </MemoryRouter>
     );
-    const helloComponent = home.getByText("Hello Sarah");
+    const helloComponent = home.getByText("Welcome, Sarah");
     expect(helloComponent).toBeInTheDocument();
 
     const answeredQuestions = home.getByText("Answered Questions");
@@ -84,17 +84,7 @@ describe("Home Component", () => {
     const questionsContainer = home.container.getElementsByClassName(
       "questions-container"
     );
-    expect(questionsContainer).toHaveLength(2);
-
-    const answeredQuestionsContainer = home.container.getElementsByClassName(
-      "answered-questions-container"
-    );
-    expect(answeredQuestionsContainer).toHaveLength(1);
-
-    const unansweredQuestionsContainer = home.container.getElementsByClassName(
-      "unanswered-questions-container"
-    );
-    expect(unansweredQuestionsContainer).toHaveLength(1);
+    expect(questionsContainer).toHaveLength(1);
   });
 
   it("navigates to question page when button is clicked", () => {
@@ -120,10 +110,10 @@ describe("Home Component", () => {
       </MemoryRouter>
     );
 
-    fireEvent.click(getByTestId(`show-button-${mockQuestions[0].id}`));
+    fireEvent.click(getByTestId(`show-button-${mockQuestions[2].id}`));
 
     expect(mockNavigate).toHaveBeenCalledWith(
-      `/questions/${mockQuestions[0].id}`
+      `/questions/${mockQuestions[2].id}`
     );
   });
 });

@@ -3,11 +3,13 @@ import { connect } from "react-redux";
 import Nav from "../components/Nav";
 import Question from "../components/Question";
 import "../styles/Home.css";
+import "../styles/HomeTabs.css";
 import { QuestionsType } from "../models/question.type";
 import { AuthedUserType, UsersType } from "../models/user.type";
 import { formatDate } from "../helpers";
-import { NotFound } from "../components/NotFound";
+import { Protected } from "../components/Protected";
 import { Dispatch } from "redux";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 
 const HomePage = ({
   authedUser,
@@ -20,9 +22,11 @@ const HomePage = ({
   users: UsersType;
   dispatch:Dispatch
 }) => {
-  if(!authedUser) return <NotFound/>;
-  
-  const filteredQuestions = (answered:boolean) =>
+  if (!authedUser) {
+    return <Protected />;
+  }
+
+  const filteredQuestions = (answered: boolean) =>
     questions.filter((question) =>
       answered
         ? question.answered_by.includes(authedUser.id)
@@ -31,39 +35,55 @@ const HomePage = ({
 
   return (
     <div>
-      <Nav dispatch={dispatch}/>
-      <h1>Hello {authedUser?.name}</h1>
+      <Nav dispatch={dispatch} />
+      <h1>Welcome, {authedUser.name}</h1>
       <div className="home-container">
-        {[false, true].map((answered) => (
-          <div
-            key={answered ? "answered" : "unanswered"}
-            className={
-              answered
-                ? "answered-questions-container"
-                : "unanswered-questions-container"
-            }
-          >
-            <h2>{answered ? "Answered" : "Unanswered"} Questions</h2>
+        <Tabs className="custom-tabs">
+          <TabList className="tab-list">
+            <Tab className="tab-item">Unanswered Questions</Tab>
+            <Tab className="tab-item">Answered Questions</Tab>
+          </TabList>
+
+          <TabPanel className="tab-panel">
             <div className="questions-container">
-              {filteredQuestions(answered)
-                .sort((a, b) =>+new Date(b.created_at) - +new Date(a.created_at))
+              {filteredQuestions(false)
+                .sort(
+                  (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+                )
                 .map((question) => (
                   <Question
                     key={question.id}
                     id={question.id}
-                    name={
-                      users.find((user) => user.id === question.created_by)?.name as string
-                    }
+                    name={users.find((user) => user.id === question.created_by)?.name || ""}
                     timestamp={formatDate(question.created_at)}
                   />
                 ))}
             </div>
-          </div>
-        ))}
+          </TabPanel>
+
+          <TabPanel className="tab-panel">
+            <div className="questions-container">
+              {filteredQuestions(true)
+                .sort(
+                  (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+                )
+                .map((question) => (
+                  <Question
+                    key={question.id}
+                    id={question.id}
+                    name={users.find((user) => user.id === question.created_by)?.name || ""}
+                    timestamp={formatDate(question.created_at)}
+                  />
+                ))}
+            </div>
+          </TabPanel>
+        </Tabs>
       </div>
     </div>
   );
 };
+
+
 
 const mapStateToProps = ({
   authedUser,

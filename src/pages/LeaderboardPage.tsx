@@ -5,7 +5,7 @@ import "../styles/Leaderboard.css";
 import { ScoresType } from "../models/score.type";
 import { AuthedUserType, UsersType } from "../models/user.type";
 import { sortScores } from "../helpers";
-import { NotFound } from "../components/NotFound";
+import { Protected } from "../components/Protected";
 import { useNavigate } from "react-router-dom";
 import ButtonGoBackTo from "../components/Button";
 import { Dispatch } from "redux";
@@ -22,7 +22,7 @@ const LeaderboardPage = ({
   dispatch: Dispatch;
 }) => {
   const navigate = useNavigate();
-  if (!authedUser) return <NotFound />;
+  if (!authedUser) return <Protected />;
   const sortedScores = sortScores(scores);
 
   const goToHomePage = () => {

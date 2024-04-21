@@ -2,15 +2,16 @@ import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { addAnsweredByQuestion } from "../redux/actions/questions";
 import { updateAnsweredScores } from "../redux/actions/scores";
-import { addNewAnswer } from "../redux/actions/answers";
+import { saveAnswer } from "../redux/actions/answers";
 import "../styles/QuestionPage.css";
 import { QuestionsType } from "../models/question.type";
 import { AuthedUserType, UsersType } from "../models/user.type";
 import { AnswersType } from "../models/answer.type";
 import React from "react";
-import { NotFound } from "../components/NotFound";
+import { Protected } from "../components/Protected";
 import { useNavigate } from "react-router-dom";
 import ButtonGoBackTo from "../components/Button";
+import { NotFound } from "../components/Notfound";
 
 const QuestionPage = ({
   questions,
@@ -31,7 +32,8 @@ const QuestionPage = ({
   const idFromParams = parseInt(params.id as string, 10);
   const question = questions.find((question) => question.id === idFromParams);
 
-  if (!question || !authedUser) return <NotFound />;
+  if (!authedUser) return <Protected />;
+  if (!question) return <NotFound />;
 
   const author = users.find((user) => user.id === question.created_by);
   let isThisAuthorAlreadyAnswered = question.answered_by.includes(
@@ -63,7 +65,7 @@ const QuestionPage = ({
       addAnsweredByQuestion({ authedUserId: authedUser.id, questionId })
     );
     dispatch(updateAnsweredScores({ authedUserId: authedUser.id }));
-    dispatch(addNewAnswer({ option, authedUserId: authedUser.id, questionId }));
+    dispatch(saveAnswer({ option, authedUserId: authedUser.id, questionId }));
     isThisAuthorAlreadyAnswered = true;
   };
 
@@ -76,7 +78,7 @@ const QuestionPage = ({
       <h1>Question By: {author?.name}</h1>
       <img src={author?.avatar_url} alt="avatar" />
       <h1>Would you rather </h1>
-      <div className="questions-container">
+      <div className="questions-in-page-container">
         {[question.option_one, question.option_two].map((option, index) => (
           <div key={index} className="questions-asked-container">
             <p>{option}</p>

@@ -5,6 +5,7 @@ import { setAuthedUser } from "../redux/actions/authedUser";
 
 const Nav = ({dispatch}:{dispatch:any}) => {
   const removeAuthedUser = () => {
+    localStorage.removeItem("redirect");
     dispatch(setAuthedUser({id:null,name:null}));
   };
 

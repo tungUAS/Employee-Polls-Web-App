@@ -12,7 +12,7 @@ export const receiveAnswers = ({ answers }: { answers: AnswersType }) => {
   };
 };
 
-export const addNewAnswer = ({
+export const saveAnswer = ({
   option,
   authedUserId,
   questionId,
@@ -29,7 +29,7 @@ export const addNewAnswer = ({
   };
 };
 
-export const handleAddNewAnswer = ({
+export const handlesaveAnswer = ({
   option,
   authedUserId,
   questionId,
@@ -39,7 +39,7 @@ export const handleAddNewAnswer = ({
   questionId: number;
 }) => {
   return async (dispatch: Dispatch) => {
-    dispatch(addNewAnswer({ option, authedUserId, questionId }));
+    dispatch(saveAnswer({ option, authedUserId, questionId }));
     await saveNewAnswer({ option, authedUserId, questionId });
   };
 };

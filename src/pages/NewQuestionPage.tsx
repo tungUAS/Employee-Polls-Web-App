@@ -6,7 +6,7 @@ import Nav from "../components/Nav";
 import "../styles/NewQuestion.css";
 import React from "react";
 import { AuthedUserType } from "../models/user.type";
-import { NotFound } from "../components/NotFound";
+import { Protected } from "../components/Protected";
 import { useNavigate } from "react-router-dom";
 
 
@@ -41,7 +41,7 @@ const NewQuestionPage = ({dispatch, authedUser}:{dispatch: any, authedUser: Auth
     return () => clearTimeout(timer);
   }, [submitted]);
 
-  if(!authedUser) return <NotFound/>
+  if(!authedUser) return <Protected/>
 
   const goToHomePage = () => {
     navigate("/questions");

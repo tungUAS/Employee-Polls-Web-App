@@ -2,17 +2,16 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 
-export const NotFound = () => {
+export const Protected = () => {
     const navigate = useNavigate();
 
     const goToLoginPage = () => {
-        localStorage.removeItem("redirect");
         navigate("/");
     };
     return (
         <div>
-            <p>404 Not Found</p>
-            <button onClick={goToLoginPage}>Go To Home Page</button>
+            <p>Go To Login Page To View This Page</p>
+            <button onClick={goToLoginPage}>Login Page</button>
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { saveNewQuestion, saveAnsweredByQuestion } from "../../api";
+import { saveQuestion, saveQuestionAnswer } from "../../api";
 import { QuestionsType } from "../../models/question.type";
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
@@ -34,13 +34,13 @@ export const addNewQuestion = ({authedUserId,optionOne,optionTwo}:{authedUserId:
 export const handleAddAnsweredByQuestion = ({authedUserId,questionId}:{authedUserId: number, questionId:number}) => {
   return async (dispatch: Dispatch) => {
     dispatch(addAnsweredByQuestion({authedUserId, questionId}));
-    await saveAnsweredByQuestion({authedUserId, questionId});
+    await saveQuestionAnswer({authedUserId, questionId});
   };
 }
 
 export const handleAddNewQuestion = ({authedUserId,optionOne,optionTwo}:{authedUserId:number,optionOne:string,optionTwo:string}) => {
   return async (dispatch: Dispatch) => {
     dispatch(addNewQuestion({authedUserId, optionOne, optionTwo}));
-    await saveNewQuestion({authedUserId, optionOne, optionTwo});
+    await saveQuestion({authedUserId, optionOne, optionTwo});
   };
 }
