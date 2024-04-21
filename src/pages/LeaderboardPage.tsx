@@ -5,7 +5,7 @@ import "../styles/Leaderboard.css";
 import { ScoresType } from "../models/score.type";
 import { AuthedUserType, UsersType } from "../models/user.type";
 import { sortScores } from "../helpers";
-import { Protected } from "../components/Protected";
+import Protected from "../components/Protected";
 import { useNavigate } from "react-router-dom";
 import ButtonGoBackTo from "../components/Button";
 import { Dispatch } from "redux";

@@ -6,7 +6,7 @@ import Nav from "../components/Nav";
 import "../styles/NewQuestion.css";
 import React from "react";
 import { AuthedUserType } from "../models/user.type";
-import { Protected } from "../components/Protected";
+import Protected from "../components/Protected";
 import { useNavigate } from "react-router-dom";
 
 

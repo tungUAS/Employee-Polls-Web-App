@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 
-export const NotFound = () => {
+const NotFound = () => {
     const navigate = useNavigate();
 
     const goToLoginPage = () => {
@@ -16,3 +16,5 @@ export const NotFound = () => {
         </div>
     );
 };
+
+export default NotFound;

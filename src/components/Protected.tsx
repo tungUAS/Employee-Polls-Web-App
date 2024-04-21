@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 
-export const Protected = () => {
+const Protected = () => {
     const navigate = useNavigate();
 
     const goToLoginPage = () => {
@@ -15,3 +15,5 @@ export const Protected = () => {
         </div>
     );
 };
+
+export default Protected;

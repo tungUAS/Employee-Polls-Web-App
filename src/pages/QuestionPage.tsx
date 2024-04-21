@@ -8,10 +8,10 @@ import { QuestionsType } from "../models/question.type";
 import { AuthedUserType, UsersType } from "../models/user.type";
 import { AnswersType } from "../models/answer.type";
 import React from "react";
-import { Protected } from "../components/Protected";
+import Protected from "../components/Protected";
 import { useNavigate } from "react-router-dom";
 import ButtonGoBackTo from "../components/Button";
-import { NotFound } from "../components/Notfound";
+import NotFound from "../components/Notfound";
 
 const QuestionPage = ({
   questions,

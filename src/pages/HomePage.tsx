@@ -7,7 +7,7 @@ import "../styles/HomeTabs.css";
 import { QuestionsType } from "../models/question.type";
 import { AuthedUserType, UsersType } from "../models/user.type";
 import { formatDate } from "../helpers";
-import { Protected } from "../components/Protected";
+import Protected from "../components/Protected";
 import { Dispatch } from "redux";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 
